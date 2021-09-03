@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/karagog/polygon-io-client-golang
+
+gazelle(name = "gazelle")
+
+go_library(
+    name = "polygon-io-client-golang",
+    srcs = ["doc.go"],
+    importpath = "github.com/karagog/polygon-io-client-golang",
+    visibility = ["//visibility:public"],
+)
