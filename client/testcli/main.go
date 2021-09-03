@@ -21,6 +21,7 @@ var ctx = context.Background()
 func main() {
 	tickersCmd := flag.NewFlagSet("tickers", flag.ExitOnError)
 	tickersSymbols := tickersCmd.String("symbols", "", "Comma-separated symbols to query")
+	tickersSearch := tickersCmd.String("search", "", "Search terms")
 	tickersCmd.Usage = func() {
 		fmt.Printf("Usage of the tickers command:\n\n")
 		fmt.Println("\ttestcli tickers --symbols={comma-separated-list}")
@@ -54,6 +55,7 @@ func main() {
 		tickersCmd.Parse(os.Args[2:])
 		response, err = c.Tickers(ctx, &client.TickersOptions{
 			Symbols: strings.Split(*tickersSymbols, ","),
+			Search:  *tickersSearch,
 		})
 	default:
 		panic(fmt.Sprintf("Unknown command: %s", cmd))
